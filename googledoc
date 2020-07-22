@@ -1,0 +1,77 @@
+function onOpen() {
+   DocumentApp.getUi()
+  .createMenu('Form')
+  .addItem('add Item','addItem')
+  .addToUi();
+}
+
+function addItem() {
+  var html = HtmlService.createHtmlOutputFromFile('form');
+  DocumentApp.getUi()
+  .showModalDialog(html, 'Add New Item');
+}
+
+function addNewItem(form_data) {
+  
+  var body = DocumentApp.getActiveDocument().getBody();
+  var product = {
+    FAQ_TITLE_1: ([form_data.FAQ_TITLE_1]),
+    FAQ_TITLE_2: ([form_data.FAQ_TITLE_2]),
+    FAQ_TITLE_3: ([form_data.FAQ_TITLE_3]),
+    FAQ_TITLE_4: ([form_data.FAQ_TITLE_4]),
+    FAQ_TITLE_5: ([form_data.FAQ_TITLE_5])
+  };
+
+  body.replaceText('{FAQ_TITLE_1}', product.FAQ_TITLE_1);
+  body.replaceText('{FAQ_TITLE_2}', product.FAQ_TITLE_2);
+  body.replaceText('{FAQ_TITLE_3}', product.FAQ_TITLE_3);
+  body.replaceText('{FAQ_TITLE_4}', product.FAQ_TITLE_4);
+  body.replaceText('{FAQ_TITLE_5}', product.FAQ_TITLE_5);
+}
+
+
+ <!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+  </head>
+  <body>
+    <form id="myform">
+    <div class="block form-group">
+    <label for="FAQ_TITLE_1">FAQ_TITLE_1</label>
+    <input type='text' name='FAQ_TITLE_1' id="FAQ_TITLE_1" required="required"/>
+    </div>
+    <div class="block form-group">
+    <label for="FAQ_TITLE_2">FAQ_TITLE_2</label>
+    <input type='text' name='FAQ_TITLE_2' id="FAQ_TITLE_2" required="required"/>
+    </div>
+    <div class="block form-group">
+    <label for="FAQ_TITLE_3">FAQ_TITLE_3</label>
+    <input type='text' name='FAQ_TITLE_3' id="FAQ_TITLE_3" required="required"/>
+    </div>
+    <div class="block form-group">
+    <label for="FAQ_TITLE_4">FAQ_TITLE_4</label>
+    <input type='text' name='FAQ_TITLE_4' id="FAQ_TITLE_4" required="required"/>
+    </div>
+    <div class="block form-group">
+    <label for="FAQ_TITLE_5">FAQ_TITLE_5</label>
+    <input type='text' name='FAQ_TITLE_5' id="FAQ_TITLE_5" required="required"/>
+    </div>
+    
+    <div class="block">
+    <button type="submit" class="action">Submit</button>
+    </div>
+    </form>
+    <script>
+    document.querySelector("#myform").addEventListener("submit", 
+    function(e)
+    {
+    e.preventDefault();    
+    google.script.run.addNewItem(this);
+    google.script.host.close();
+    }
+    );
+    </script>
+  </body>
+</html>
