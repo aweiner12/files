@@ -1,0 +1,9 @@
+Name	Opportunity Name Convention	 	 
+Unique Name	Opportunity_Name_Workflow	 	 
+Description	
+Object	Opportunity	 	 
+Field to Update	Opportunity: Opportunity Name
+Field Data Type	Text
+Re-evaluate Workflow Rules after Field Change	Checked
+Formula Value	TEXT(YEAR(CloseDate)) + "-" + TEXT(Sports__c) + "-" + TEXT(Season__c) + "-" + Account.Name + "-" + LEFT(TEXT(WFA_Geography__c),3)
+ 	 
